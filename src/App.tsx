@@ -1,12 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { deleteTodo, fetchTodos, Todo } from "./redux/actions";
+import {
+  deleteTodo,
+  DeleteTodoAction,
+  fetchTodos,
+  Todo
+} from "./redux/actions";
 import { StoreState } from "./redux/reducers";
 
 interface AppProps {
   todos: Todo[];
-  fetchTodos(): any;
-  deleteTodo(id: number): any;
+  fetchTodos: Function;
+  deleteTodo: typeof deleteTodo;
 }
 
 class App extends Component<AppProps> {
@@ -17,7 +22,7 @@ class App extends Component<AppProps> {
         {this.props.todos.map(
           (todo: Todo): JSX.Element => (
             <div
-              onClick={(): void => this.props.deleteTodo(todo.id)}
+              onClick={(): DeleteTodoAction => this.props.deleteTodo(todo.id)}
               key={todo.id}
             >
               <div>{todo.title}</div>
