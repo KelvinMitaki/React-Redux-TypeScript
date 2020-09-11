@@ -20,3 +20,15 @@ export const fetchTodos = () => async (dispatch: Dispatch) => {
     payload: res.data
   });
 };
+
+export interface DeleteTodoAction {
+  type: ActionTypes.deleteTodo;
+  payload: number;
+}
+
+export const deleteTodo = (id: number): DeleteTodoAction => {
+  return {
+    type: ActionTypes.deleteTodo,
+    payload: id
+  };
+};
