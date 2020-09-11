@@ -23,7 +23,7 @@ class App extends Component<AppProps, AppState> {
     super(props);
     this.state = { fetching: false };
   }
-  componentDidUpdate(prevProps: AppProps) {
+  componentDidUpdate(prevProps: AppProps): void {
     if (!prevProps.todos.length && this.props.todos.length) {
       this.setState({ fetching: false });
     }
