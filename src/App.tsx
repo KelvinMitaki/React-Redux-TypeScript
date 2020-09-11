@@ -10,7 +10,18 @@ interface AppProps {
 
 class App extends Component<AppProps> {
   render() {
-    return <div></div>;
+    return (
+      <div>
+        <button onClick={(): void => this.props.fetchTodos()}>Fetch</button>
+        {this.props.todos.map(
+          (todo: Todo): JSX.Element => (
+            <div key={todo.id}>
+              <div>{todo.title}</div>
+            </div>
+          )
+        )}
+      </div>
+    );
   }
 }
 const mapStateToProps = (state: StoreState): { todos: Todo[] } => {
