@@ -1,5 +1,7 @@
 import { combineReducers } from "redux";
+import todosReducer from "./todosReducer";
 
 export default combineReducers({
-  counter: () => 123
+  todo: todosReducer,
+  test: () => 123
 });

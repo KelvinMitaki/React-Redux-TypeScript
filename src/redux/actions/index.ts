@@ -4,15 +4,18 @@ import { ActionTypes } from "./types";
 
 const URL = "https://jsonplaceholder.typicode.com/todos";
 
-interface Todo {
+export interface Todo {
   id: number;
   title: string;
   completed: boolean;
 }
-
+export interface FetchTodosAction {
+  type: ActionTypes.fetchTodos;
+  payload: Todo[];
+}
 export const fetchTodos = () => async (dispatch: Dispatch) => {
   const res = await Axios.get<Todo[]>(URL);
-  dispatch({
+  dispatch<FetchTodosAction>({
     type: ActionTypes.fetchTodos,
     payload: res.data
   });
