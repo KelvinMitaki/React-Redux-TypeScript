@@ -14,11 +14,31 @@ interface AppProps {
   deleteTodo: typeof deleteTodo;
 }
 
-class App extends Component<AppProps> {
+interface AppState {
+  fetching: boolean;
+}
+
+class App extends Component<AppProps, AppState> {
+  constructor(props: AppProps) {
+    super(props);
+    this.state = { fetching: false };
+  }
+  componentDidUpdate(prevProps: AppProps) {
+    if (!prevProps.todos.length && this.props.todos.length) {
+      this.setState({ fetching: false });
+    }
+  }
   render() {
     return (
       <div>
-        <button onClick={(): void => this.props.fetchTodos()}>Fetch</button>
+        <button
+          onClick={(): void => {
+            this.setState({ fetching: true });
+            this.props.fetchTodos();
+          }}
+        >
+          Fetch
+        </button>
         {this.props.todos.map(
           (todo: Todo): JSX.Element => (
             <div
@@ -29,6 +49,7 @@ class App extends Component<AppProps> {
             </div>
           )
         )}
+        {this.state.fetching && <h4>Fetching...</h4>}
       </div>
     );
   }
