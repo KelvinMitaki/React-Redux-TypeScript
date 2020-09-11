@@ -1,7 +1,11 @@
 import { combineReducers } from "redux";
+import { Todo } from "../actions";
 import todosReducer from "./todosReducer";
 
-export default combineReducers({
-  todo: todosReducer,
-  test: () => 123
+export interface StoreState {
+  todos: Todo[];
+}
+
+export default combineReducers<StoreState>({
+  todos: todosReducer
 });

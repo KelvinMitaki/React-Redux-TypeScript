@@ -1,33 +1,21 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchTodos, Todo } from "./redux/actions";
+import { StoreState } from "./redux/reducers";
 
 interface AppProps {
-  color?: string;
+  todos: Todo[];
+  fetchTodos(): any;
 }
 
 class App extends Component<AppProps> {
-  state = {
-    counter: 0
-  };
   render() {
-    return (
-      <div>
-        <button
-          onClick={(): void =>
-            this.setState({ counter: this.state.counter + 1 })
-          }
-        >
-          Increment
-        </button>
-        <button
-          onClick={(): void =>
-            this.setState({ counter: this.state.counter - 1 })
-          }
-        >
-          Decrement
-        </button>
-        {this.state.counter}
-      </div>
-    );
+    return <div></div>;
   }
 }
-export default App;
+const mapStateToProps = (state: StoreState): { todos: Todo[] } => {
+  return {
+    todos: state.todos
+  };
+};
+export default connect(mapStateToProps, { fetchTodos })(App);
